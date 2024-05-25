@@ -2,35 +2,37 @@
 service: ocapi
 
 # Name of the container image.
-image: your-user/ocapi
+image: lastradev/ocapi
 
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
-  # job:
-  #   hosts:
-  #     - 192.168.0.1
-  #   cmd: bin/solid_queue work
+    hosts:
+      - 150.136.105.238
+    labels:
+      traefik.http.routers.my_awesome_app.entrypoints: websecure
+      traefik.http.routers.my_awesome_app.rule: Host(`crimes.lastradev.com`)
+      traefik.http.routers.my_awesome_app.tls.certresolver: letsencrypt
+    options:
+      network: "private"
 
 # Credentials for your image host.
 registry:
-  # Specify the registry server, if you're not using Docker Hub
-  # server: registry.digitalocean.com / ghcr.io / ...
-  username: your-user
-
-  # Always use an access token rather than real password when possible.
+  username: lastradev
   password:
-    - KAMAL_REGISTRY_PASSWORD
+    - DOCKER_REGISTRY_PASSWORD
 
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
 env:
   secret:
     - RAILS_MASTER_KEY
-  # clear:
-  #   DB_HOST: 192.168.0.2
-
+    - MYSQL_PASSWORD
+    - GDRIVE_API_KEY
+  clear:
+    MYSQL_USER: "ocapi"
+    MYSQL_DATABASE: "ocapi_production"
+    MYSQL_HOST: "ocapi-db"
 
 # Use a persistent storage volume for sqlite database files and local Active Storage files.
 # Recommended to change this to a mounted volume path that is backed up off server.
@@ -44,13 +46,13 @@ volumes:
 asset_path: /rails/public/assets
 
 # Use a different ssh user than root
-# ssh:
-#   user: app
+ssh:
+  user: ubuntu
 
 # Configure builder setup (defaults to multi-arch images).
-# builder:
-#   # Build same-arch image locally (use for x86->x86)
-#   multiarch: false
+builder:
+  # Build same-arch image locally (use for x86->x86)
+  multiarch: false
 #
 #   # Build diff-arch image via remote server
 #   remote:
@@ -64,24 +66,22 @@ asset_path: /rails/public/assets
 #     - RAILS_MASTER_KEY
 
 # Use accessory services (secrets come from .env).
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     port: 3306
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
-#   redis:
-#     image: redis:7.0
-#     host: 192.168.0.2
-#     port: 6379
-#     directories:
-#       - data:/data
+accessories:
+  db:
+    image: mysql:8.0
+    host: 150.136.105.238
+    env:
+      clear:
+        MYSQL_USER: "ocapi"
+        MYSQL_DATABASE: "ocapi_production"
+        MYSQL_RANDOM_ROOT_PASSWORD: "true"
+      secret:
+        - MYSQL_PASSWORD
+    directories:
+      - data:/var/lib/mysql
+    options:
+      network: "private"
+
+traefik:
+  options:
+    network: "private"

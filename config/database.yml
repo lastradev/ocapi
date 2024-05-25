@@ -52,4 +52,5 @@ production:
   <<: *default
   database: ocapi_production
   username: ocapi
-  password: <%= ENV["OCAPI_DATABASE_PASSWORD"] %>
+  password: <%= ENV["MYSQL_PASSWORD"] %>
+  host: <%= ENV["MYSQL_HOST"] %>
