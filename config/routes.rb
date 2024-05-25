@@ -9,6 +9,14 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
+  defaults format: :json do
+    resources :crimes, only: %i[index]
+    namespace :crimes do
+      get :download
+      get :robberies
+    end
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
