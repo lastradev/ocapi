@@ -109,6 +109,7 @@ GEM
       racc
     builder (3.2.4)
     byebug (11.1.3)
+    chronic (0.10.2)
     coderay (1.1.3)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
@@ -294,6 +295,8 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     zeitwerk (2.6.14)
 
 PLATFORMS
@@ -321,6 +324,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   smarter_csv (~> 1.10)
   tzinfo-data
+  whenever
 
 BUNDLED WITH
    2.5.10

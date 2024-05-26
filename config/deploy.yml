@@ -17,6 +17,11 @@ servers:
       traefik.http.routers.kiqr_cloud_secure.tls.certresolver: letsencrypt
     options:
       network: "private"
+  cron:
+    hosts:
+      - 150.136.105.238
+    cmd:
+      "cron -f"
 
 # Credentials for your image host.
 registry:

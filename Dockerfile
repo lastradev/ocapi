@@ -15,7 +15,7 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl default-mysql-client libjemalloc2 libvips && \
+    apt-get install --no-install-recommends -y curl default-mysql-client libjemalloc2 libvips cron && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
@@ -45,6 +45,11 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 
+# Create empty crontab file
+RUN crontab -l | { cat; echo ""; } | crontab -
+
+# Update crontab file using whenever command
+RUN bundle exec whenever --update-crontab
 
 
 # Final stage for app image

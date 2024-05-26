@@ -56,3 +56,5 @@ gem "smarter_csv", "~> 1.10"
 gem "httparty", "~> 0.22.0"
 
 gem "nokogiri", "~> 1.16"
+
+gem 'whenever', require: false 
