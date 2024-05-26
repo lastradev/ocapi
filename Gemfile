@@ -43,8 +43,16 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem 'pry-byebug'
+
+  gem 'dotenv'
 end
 
 
 
 gem "kaminari", "~> 1.2"
+
+gem "smarter_csv", "~> 1.10"
+
+gem "httparty", "~> 0.22.0"
+
+gem "nokogiri", "~> 1.16"
