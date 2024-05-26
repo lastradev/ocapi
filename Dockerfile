@@ -45,11 +45,8 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 
-# Create empty crontab file
-RUN crontab -l | { cat; echo ""; } | crontab -
-
-# Update crontab file using whenever command
-RUN bundle exec whenever --update-crontab
+# Modify cron permissions
+RUN chmod u+s /usr/sbin/cron
 
 
 # Final stage for app image
@@ -64,6 +61,11 @@ RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER 1000:1000
+
+
+# Update crontab file using whenever command
+RUN bundle exec whenever --update-crontab --user rails
+
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
