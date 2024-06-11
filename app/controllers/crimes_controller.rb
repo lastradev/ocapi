@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# test
 class CrimesController < ApplicationController
   def index
     @crimes = crimes
