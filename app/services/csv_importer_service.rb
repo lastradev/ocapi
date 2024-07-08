@@ -18,8 +18,12 @@ class CsvImporterService
   private
 
   def import_csv
-    SmarterCSV.process(CsvDownloaderService::FILE_PATH, options) do |chunk|
-      chunk.each { |row| import_row(row) }
+    Crime.transaction do
+      Crime.delete_all
+
+      SmarterCSV.process(CsvDownloaderService::FILE_PATH, options) do |chunk|
+        chunk.each { |row| import_row(row) }
+      end
     end
   end
 
@@ -34,6 +38,6 @@ class CsvImporterService
   def import_row(row)
     return unless ['Tampico', 'Altamira', 'Ciudad Madero'].include?(row['city'])
 
-    Crime.find_or_create_by!(row)
+    Crime.new(row).save(validate: false)
   end
 end
