@@ -51,7 +51,7 @@ end
 
 gem "kaminari", "~> 1.2"
 
-gem "smarter_csv", "~> 1.10"
+gem "smarter_csv", "~> 1.12"
 
 gem "httparty", "~> 0.22.0"
 

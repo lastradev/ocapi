@@ -278,7 +278,7 @@ GEM
       rubocop-performance
       rubocop-rails
     ruby-progressbar (1.13.0)
-    smarter_csv (1.10.3)
+    smarter_csv (1.12.1)
     sshkit (1.22.2)
       base64
       mutex_m
@@ -325,7 +325,7 @@ DEPENDENCIES
   rack-cors
   rails!
   rubocop-rails-omakase
-  smarter_csv (~> 1.10)
+  smarter_csv (~> 1.12)
   tzinfo-data
   whenever
 
