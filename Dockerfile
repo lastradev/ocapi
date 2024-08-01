@@ -44,11 +44,6 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-
-# Modify cron permissions
-RUN chmod u+s /usr/sbin/cron
-
-
 # Final stage for app image
 FROM base
 
@@ -60,12 +55,15 @@ COPY --from=build /rails /rails
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
-USER 1000:1000
 
+# Modify cron permissions
+RUN chmod u+s /usr/sbin/cron
+RUN chown rails:rails /var/run
+
+USER 1000:1000
 
 # Update crontab file using whenever command
 RUN bundle exec whenever --update-crontab --user rails
-
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
