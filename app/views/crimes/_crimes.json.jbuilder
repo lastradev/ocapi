@@ -16,7 +16,7 @@ json.content do
     json.crime_subtype         crime.crime_subtype
     json.modality              crime.modality
     json.january_count         crime.january_count
-    json.february_count        crime.january_count
+    json.february_count        crime.february_count
     json.march_count           crime.march_count
     json.april_count           crime.april_count
     json.may_count             crime.may_count
