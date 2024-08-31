@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: f114a247aa2046287db033bd652c3e5b9930f549
+  revision: 5c0b7496ab32c25c80f6d1bdc8b32ec6f75ce1e4
   branch: main
   specs:
     actioncable (8.0.0.alpha)
@@ -27,7 +27,6 @@ GIT
       actionview (= 8.0.0.alpha)
       activesupport (= 8.0.0.alpha)
       nokogiri (>= 1.8.5)
-      racc
       rack (>= 2.2.4)
       rack-session (>= 1.0.1)
       rack-test (>= 0.6.3)
@@ -65,11 +64,13 @@ GIT
     activesupport (8.0.0.alpha)
       base64
       bigdecimal
-      concurrent-ruby (~> 1.0, >= 1.0.2)
+      concurrent-ruby (~> 1.0, >= 1.3.1)
       connection_pool (>= 2.2.5)
       drb
       i18n (>= 1.6, < 2)
+      logger (>= 1.4.2)
       minitest (>= 5.1)
+      securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
     rails (8.0.0.alpha)
       actioncable (= 8.0.0.alpha)
@@ -107,11 +108,11 @@ GEM
       msgpack (~> 1.2)
     brakeman (6.1.2)
       racc
-    builder (3.2.4)
+    builder (3.3.0)
     byebug (11.1.3)
     chronic (0.10.2)
     coderay (1.1.3)
-    concurrent-ruby (1.2.3)
+    concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
     crass (1.0.6)
     csv (3.3.0)
@@ -122,7 +123,7 @@ GEM
     dotenv (2.8.1)
     drb (2.2.1)
     ed25519 (1.3.0)
-    erubi (1.12.0)
+    erubi (1.13.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     httparty (0.22.0)
@@ -132,7 +133,7 @@ GEM
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
-    irb (1.13.1)
+    irb (1.14.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jbuilder (2.12.0)
@@ -163,6 +164,7 @@ GEM
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
     language_server-protocol (3.17.0.3)
+    logger (1.6.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -174,13 +176,13 @@ GEM
     marcel (1.0.4)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    minitest (5.23.1)
+    minitest (5.25.1)
     msgpack (1.7.2)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     mutex_m (0.2.0)
     mysql2 (0.5.6)
-    net-imap (0.4.11)
+    net-imap (0.4.15)
       date
       net-protocol
     net-pop (0.1.2)
@@ -221,8 +223,8 @@ GEM
       stringio
     puma (6.4.2)
       nio4r (~> 2.0)
-    racc (1.8.0)
-    rack (3.0.11)
+    racc (1.8.1)
+    rack (3.1.7)
     rack-cors (2.0.2)
       rack (>= 2.0.0)
     rack-session (2.0.0)
@@ -244,7 +246,7 @@ GEM
     rdoc (6.7.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
-    reline (0.5.7)
+    reline (0.5.9)
       io-console (~> 0.5)
     rexml (3.2.8)
       strscan (>= 3.0.9)
@@ -278,6 +280,7 @@ GEM
       rubocop-performance
       rubocop-rails
     ruby-progressbar (1.13.0)
+    securerandom (0.3.1)
     smarter_csv (1.10.3)
     sshkit (1.22.2)
       base64
@@ -285,9 +288,9 @@ GEM
       net-scp (>= 1.1.2)
       net-sftp (>= 2.1.2)
       net-ssh (>= 2.8.0)
-    stringio (3.1.0)
+    stringio (3.1.1)
     strscan (3.1.0)
-    thor (1.3.1)
+    thor (1.3.2)
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -299,7 +302,7 @@ GEM
     websocket-extensions (0.1.5)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    zeitwerk (2.6.14)
+    zeitwerk (2.6.17)
 
 PLATFORMS
   aarch64-linux
