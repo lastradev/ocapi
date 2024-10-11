@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
-# test
 class CrimesController < ApplicationController
+  PERMITTED_PARAMS = %i[
+    year
+    city
+    affected_legal_asset
+    crime_type
+    crime_subtype
+    modality
+  ]
+
   def index
     @crimes = crimes
   end
@@ -21,7 +29,7 @@ class CrimesController < ApplicationController
   private
 
   def crime_params
-    params.except(:page, :format).permit(%i[year city affected_legal_asset crime_type crime_subtype modality])
+    params.except(:page, :format).permit(PERMITTED_PARAMS)
   end
 
   def crimes
